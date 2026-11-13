@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Rozha+One&family=Noto+Serif+Devanagari:wght@600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    --background: #FFFFFF;
+    --foreground: #171717;
+  }
+
+  body {
+    @apply bg-white text-brand-charcoal font-sans antialiased selection:bg-brand-softRed selection:text-brand-deepRed;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight text-brand-charcoal;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F20D18;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Flight Path SVG Animation */
+@keyframes flightDash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-flight-path {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: flightDash 3s ease-in-out forwards;
+}
+
+/* --- BULLETPROOF A4 BOOKING RECEIPT PRINT STYLESHEET --- */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  /* 1. Hide ordinary website chrome and non-receipt modals */
+  body > *:not(#booking-receipt-portal) {
+    display: none !important;
+  }
+
+  header,
+  footer,
+  nav,
+  aside,
+  .print-controls,
+  .no-print,
+  button:not(.print-allow) {
+    display: none !important;
+  }
+
+  /* 2. Reset html and body to clean printable flow */
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    line-height: 1.35 !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 3. Strip fixed modal backdrop */
+  #booking-receipt-portal {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    inset: auto !important;
+  }
+
+  #booking-receipt-modal-card {
+    position: static !important;
+    display: block !important;
+    border: none !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    max-height: none !important;
+    background: #ffffff !important;
+  }
+
+  /* 4. Ensure receipt and all its descendants are 100% visible and styled */
+  #booking-receipt-print,
+  #printable-receipt {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #booking-receipt-print *,
+  #printable-receipt * {
+    visibility: visible !important;
+    opacity: 1 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 5. Prevent unwanted page breaks inside crucial receipt sections */
+  table {
+    page-break-inside: auto;
+    width: 100% !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+}

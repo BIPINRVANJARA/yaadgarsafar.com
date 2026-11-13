@@ -1,0 +1,39 @@
+{
+  "rules": {
+    "packages": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "package_commercials": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "destinations": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "enquiries": {
+      ".read": "auth != null",
+      "$enquiryId": {
+        ".read": true,
+        ".write": true
+      }
+    },
+    "receipts": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "counters": {
+      ".read": true,
+      ".write": true
+    },
+    "gallery": {
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "site_settings": {
+      ".read": true,
+      ".write": "auth != null"
+    }
+  }
+}
